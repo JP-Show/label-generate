@@ -17,8 +17,10 @@ public class ManageFiles {
 		BufferedReader br = new BufferedReader(this.file);
 		List<String> text = new ArrayList<>();
 		
-		while(br.readLine() != null) {
-			text.add(br.readLine());	
+		String line = br.readLine();
+		while(line != null) {
+			text.add(line);
+			line = br.readLine();
 		}
 		
 		return text;
