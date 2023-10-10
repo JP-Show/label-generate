@@ -3,12 +3,14 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.Recorted;
+
 public class Report {
 	private List<String> report;
 
 	public Report(List<String> report, String[] items) {
 		this.report = report;
-		this.pickup(items);
+		this.report = Recorted.pickup(items, this.report);
 		this.formatLine();
 	}
 	
@@ -16,18 +18,6 @@ public class Report {
 		return report;
 	}
 
-	private void pickup(String[] items){
-		List<String> newReport = new ArrayList<>();
-		this.report.forEach(line -> {
-			for(String item : items) {
-				if(line.contains(item)) {
-					newReport.add(line);
-					break;
-				}
-			}
-		});
-		this.report = newReport;
-	}
 	
 	private void formatLine(){
 		List<String> newReport = new ArrayList<>();

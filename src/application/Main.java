@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import entities.Memory;
 import entities.Report;
 import utils.ManageFiles;
 import utils.Recorted;
@@ -22,11 +23,13 @@ public class Main {
 			textFile = mf.fileToString();
 
 			String[] arr = new String[] { "Tipo de processador", "Nome da Placa Mãe", "Atualizar", "Disco rígido",
-					"Nome do Sistema Operacional", "DIMM", "Tipo de núcleo do Sistema Operacional", };
+					"Sistema operacional", "DIMM", "Tipo de Computador", };
 			List<String> testArr = Recorted.polish(textFile,beggin, end);
 			Report report = new Report(testArr, arr);
-
-
+			Memory memory = new Memory(report.getReport());
+			
+			System.out.println(memory.toString());
+			
 			for (String line : report.getReport()) {
 				System.out.println(line);
 			}
