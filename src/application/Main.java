@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import entities.Memory;
+
+import entities.Label;
+
 import entities.Report;
 import utils.ManageFiles;
 import utils.Recorted;
@@ -26,14 +28,11 @@ public class Main {
 					"Sistema operacional", "DIMM", "Tipo de Computador", };
 			List<String> testArr = Recorted.polish(textFile,beggin, end);
 			Report report = new Report(testArr, arr);
-			Memory memory = new Memory(report.getReport());
-			
-			System.out.println(memory.toString());
-			
-			for (String line : report.getReport()) {
-				System.out.println(line);
-			}
 
+			
+			Label label = new Label(report.getReport());
+			System.out.println(label.toString());
+			
 		} catch (IOException err) {
 			System.out.println(err.getMessage());
 		}

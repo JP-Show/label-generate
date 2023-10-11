@@ -1,20 +1,31 @@
 package entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import utils.Recorted;
-
 public class Disk {
-	String disk;
-	String type;
-	List<> listDisk;
-	List<String> reportDisk = new ArrayList<>();
-	public Disk(List<String >report) {
-		this.listDisk = Recorted.pickup("Disco rígido", report);
+	private String disk;
+	private String type;
+	
+	public Disk () {
+	}
+
+	public Disk(String disk, String type) {
 		this.disk = disk;
 		this.type = type;
 	}
-	
+
+	public String getDisk() {
+		return disk;
+	}
+
+	public void setDisk(String disk) {
+		this.disk = disk;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 	
 }
