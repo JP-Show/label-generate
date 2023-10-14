@@ -19,12 +19,13 @@ public class Label {
 
 	@Override
 	public String toString() {
+
 		StringBuilder sb = new StringBuilder();
-		sb.append("SISTEMA = " + this.os.toString().toUpperCase());
-		sb.append("\nPLACA MÃE = " + this.motherboard.toString().toUpperCase());
-		sb.append("\nPROCESSADOR = " + this.cpu.toString().toUpperCase());
-		sb.append("\nMEMÓRIA = " + this.ram.toString().toUpperCase());
-		sb.append("\nDISCO = "+this.disk.toString().toUpperCase());
+		sb.append("SISTEMA = " + this.os.toString().toUpperCase().trim());
+		sb.append("\nPLACA MÃE = " + this.motherboard.toString().toUpperCase().trim());
+		sb.append("\nPROCESSADOR = " + this.cpu.toString().toUpperCase().trim());
+		sb.append("\nMEMÓRIA = " + this.ram.toString().toUpperCase().trim());
+		sb.append("\nDISCO = "+this.disk.toString().toUpperCase().trim());
 		return sb.toString();
 	}
 	

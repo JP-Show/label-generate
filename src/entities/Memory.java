@@ -3,11 +3,12 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 import entities.Memorie;
+import model.exceptions.FormatException;
 import utils.Recorted;
 
 public class Memory {
 	
-	final private String[] ITEM = new String[] {"DIMM"};
+	final private String[] ITEM = new String[] {"DIMM1:", "DIMM2:", "DIMM3:", "DIMM4:"};
 	private List<Memorie> memories;
 	private String type;
 	private List<String> reportMemories;
@@ -33,9 +34,13 @@ public class Memory {
 		this.type = type;
 	}
 
-	private void setInfo () {
+	private void setInfo () throws FormatException {
 			List<Memorie> list = new ArrayList<>();
-			
+			if(this.reportMemories.size() == 0) {
+				this.memories.add(new Memorie(1, "unknown"));
+				this.type = "unknown";
+				throw new FormatException("erro a setar a memória");
+			}
 			for (String line : this.reportMemories) {
 				if(list.size() == 0) {
 					Memorie ram = new Memorie();
