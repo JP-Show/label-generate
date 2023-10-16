@@ -15,6 +15,7 @@ public class Memory {
 	
 	public Memory(List<String> report) {
 		this.reportMemories = Recorted.pickup(ITEM, report);
+		this.reportMemories = this.reportMemories.subList(0, this.reportMemories.size() / 2);
 		this.setInfo();
 	}
 	
@@ -35,6 +36,7 @@ public class Memory {
 	}
 
 	private void setInfo () throws FormatException {
+			
 			List<Memorie> list = new ArrayList<>();
 			if(this.reportMemories.size() == 0) {
 				this.memories.add(new Memorie(1, "unknown"));
@@ -57,12 +59,11 @@ public class Memory {
 							ram.setMemory(line.substring(50, 55));
 							ram.setHasTwin(1);
 							list.add(ram);
-
 						}
 					}
 				}
 			}
-
+			
 			this.memories = list;
 			String m = this.reportMemories.get(0).toString();
 			this.type = m.substring(m.indexOf("DDR"), m.indexOf("DDR") + 4).trim();

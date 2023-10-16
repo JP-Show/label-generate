@@ -28,7 +28,8 @@ public class Disks {
 			}else {
 				ssdOrHdd = "SSD";
 			}
-			name = disk.substring(disk.indexOf("(") + 1, disk.indexOf(",")).replaceAll(" ", "");
+			if(disk.contains("GB"))
+				name = disk.substring(disk.indexOf("(") + 1, disk.indexOf("B") + 1).replaceAll(" ", "");
 			Disk newDisk = new Disk(name, ssdOrHdd);
 			this.listDisk.add(newDisk);
 		}

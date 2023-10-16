@@ -1,7 +1,7 @@
 package entities;
 
 public class Memorie {
-	int hasTwin;
+	int hasTwin = 1;
 	String memory;
 	
 	public Memorie() {}
@@ -20,6 +20,10 @@ public class Memorie {
 	}
 	public void setMemory(String memory) {
 		this.memory = memory;
+	}
+	@Override
+	public String toString() {
+		return "Memorie [hasTwin= " + hasTwin + ", memory= " + memory + " ]";
 	}
 	
 	

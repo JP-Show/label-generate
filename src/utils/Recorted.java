@@ -8,7 +8,7 @@ import model.exceptions.FormatException;
 public class Recorted {
 
 	public static List<String> polish(List<String> list, String begin, String end) {
-		return list.subList(list.indexOf(begin), list.indexOf(end));
+		return list.subList(list.indexOf(begin), list.indexOf(end) + 15);
 	}
 
 	public static List<String> pickup(String[] items, List<String> report) throws FormatException {

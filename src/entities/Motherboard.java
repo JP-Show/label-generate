@@ -11,7 +11,7 @@ public class Motherboard {
 	
 	public Motherboard (List<String> report) {
 		this.motherboard = Recorted.pickup(new String[] { "Nome da Placa Mãe" }, report).get(0);
-		this.socket = Recorted.pickup(new String[] {"Atualiza" }, report).get(0) ;
+		this.socket = Recorted.pickup(new String[] {"Identificador da plataforma" }, report).get(0) ;
 		this.setInf();
 	}
 	
@@ -22,16 +22,17 @@ public class Motherboard {
 			this.motherboard = this.motherboard.substring(50);
 		
 		if(this.socket != "") {
-			this.socket = this.socket.substring(50).toUpperCase();
+			String socket = this.socket = this.socket.substring(50);
+			this.socket = socket.toUpperCase().substring(socket.indexOf("(") + 1, socket.indexOf(")"));
 		}
 		else {
-			this.socket = "Unknown";			
+			this.socket = "UNKNOWN";			
 		}
 	}
 	
 	@Override
 	public String toString() {
-		return this.motherboard.trim() + " " + this.socket;
+		return this.motherboard.trim() + " SOCKET " + this.socket;
 	}
 	
 }
