@@ -16,6 +16,12 @@ public class Motherboard {
 	}
 	
 	public void setInf ( ) throws FormatException {
+		if(this.motherboard == "" || this.socket == "") {
+			this.motherboard = "Unknown";
+			this.socket = "UNKNOWN";
+			return;
+		}
+		
 		if(this.motherboard.contains("("))
 			this.motherboard = this.motherboard.substring(50, this.motherboard.indexOf("("));
 		else
@@ -32,7 +38,7 @@ public class Motherboard {
 	
 	@Override
 	public String toString() {
-		return this.motherboard.trim() + " SOCKET " + this.socket;
+		return this.motherboard.trim() + " SOCKET = " + this.socket;
 	}
 	
 }

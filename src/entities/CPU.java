@@ -2,7 +2,6 @@ package entities;
 
 import java.util.List;
 
-import model.exceptions.FormatException;
 import utils.Recorted;
 
 public class CPU {
@@ -15,7 +14,8 @@ public class CPU {
 		this.setInf();
 	}
 
-	public void setInf() throws FormatException {
+	public void setInf() {
+		
 		if (this.reportCpu.contains("Intel")) {
 			this.cpu = this.reportCpu.substring(this.reportCpu.indexOf("Intel"), this.reportCpu.indexOf(","));
 			String num = this.reportCpu.substring(this.reportCpu.indexOf(",") + 1, this.reportCpu.indexOf("MHz"));
@@ -25,13 +25,15 @@ public class CPU {
 			String num = this.reportCpu.substring(this.reportCpu.indexOf(",") + 1, this.reportCpu.indexOf("MHz"));
 			this.ghz = Double.parseDouble(num) / 1000;
 		}else {
-			throw new FormatException("error a setar a cpu");
+			this.ghz = 0;
+			this.cpu = "unknown";
+			return;
 		}
 	}
 
 	@Override
 	public String toString() {
-		return this.cpu + " " + this.ghz + "GHz";
+		return this.cpu + ", " + this.ghz + "GHz";
 	}
 
 }

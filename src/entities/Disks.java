@@ -8,8 +8,11 @@ import utils.Recorted;
 public class Disks {
 	List<Disk> listDisk = new ArrayList<>();
 	List<String> reportDisk = new ArrayList<>();
+	List<String> reportType = new ArrayList<>();
 	public Disks(List<String> report) {
-		this.reportDisk = Recorted.pickup(new String[] {"Disco rígido"}, report);
+		this.reportDisk = Recorted.pickup(new String[] {"Capacidade depois de formatado"}, report);
+		this.reportType = Recorted.pickup(new String[] {"Velocidade de rotação"}, report);
+
 		this.setInf();
 		
 	}
@@ -21,17 +24,22 @@ public class Disks {
 	}
 	public void setInf() {
 		String ssdOrHdd = "";
-		String name = "";
+		String qt = "";
+		int num = 0;
 		for(String disk : this.reportDisk) {
-			if(disk.contains("RPM")) {
-				ssdOrHdd = "HDD";
+			if(disk.isEmpty() == false) {
+				qt = disk.substring(50).replaceAll(" ", "");
+				if(this.reportType.get(num).contains("RPM")) 
+					ssdOrHdd = "HDD";
+				else
+					ssdOrHdd = this.reportType.get(num).substring(50);
 			}else {
-				ssdOrHdd = "SSD";
+				qt = "unknown";
+				ssdOrHdd = "unknown";
 			}
-			if(disk.contains("GB"))
-				name = disk.substring(disk.indexOf("(") + 1, disk.indexOf("B") + 1).replaceAll(" ", "");
-			Disk newDisk = new Disk(name, ssdOrHdd);
+			Disk newDisk = new Disk(qt, ssdOrHdd);
 			this.listDisk.add(newDisk);
+			num++;
 		}
 	}
 	@Override

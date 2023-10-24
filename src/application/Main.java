@@ -18,15 +18,14 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		String beggin = "--------[ Sumário ]-----------------------------------------------------------------------------------------------------";
-		String end = "--------[ CPUID ]-------------------------------------------------------------------------------------------------------";
+		String end = "--------[ SMART ]-------------------------------------------------------------------------------------------------------";
 		// String end = " Fabricante do processador:";
 		String path = "\\\\192.168.30.250\\programas\\Etiquetas";
 		System.out.println(path);
+		OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument(path + "\\Pad.odt");
 		try {
-
 			File file = new File(path);
 			File[] files = file.listFiles();
-			OdfTextDocument odt = (OdfTextDocument) OdfDocument.loadDocument(path + "\\Pad.odt");
 
 			int i = 0;
 
@@ -42,30 +41,30 @@ public class Main {
 					textFile = mf.fileToString();
 
 					String[] arr = new String[] { "Tipo de processador", "Nome da Placa Mãe",
-							"Identificador da plataforma", "Disco rígido", "Sistema operacional", "DIMM",
-							"Tipo de Computador", };
+							"Identificador da plataforma", "Capacidade depois de formatado", "Velocidade de rotação",
+							"Sistema operacional", "DIMM", "Tipo de Computador", };
 					List<String> testArr = Recorted.polish(textFile, beggin, end);
 					Report report = new Report(testArr, arr);
-					
-					//for (String a : report.getReport())
-					//	System.out.println(a);
-					
+
+					// for (String a : report.getReport())
+					// System.out.println(a);
+
 					Label label = new Label(report.getReport());
-					
+
 					System.out.println(label.toString());
 					System.out.println();
 
 					odt.getTableList().get(0).getCellByPosition(0, i).setDisplayText(label.toString());
-					;
-
 					i++;
 				}
 
 			}
-			odt.save(path + "\\test2.odt");
 
 		} catch (IOException err) {
 			System.out.println("error para pegar as informação" + err.getMessage());
+		} finally {
+
+			odt.save(path + "\\test2.odt");
 		}
 
 	}

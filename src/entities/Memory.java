@@ -2,14 +2,13 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.List;
-import entities.Memorie;
-import model.exceptions.FormatException;
+
 import utils.Recorted;
 
 public class Memory {
 	
 	final private String[] ITEM = new String[] {"DIMM1:", "DIMM2:", "DIMM3:", "DIMM4:"};
-	private List<Memorie> memories;
+	private List<Memorie> memories = new ArrayList<>();
 	private String type;
 	private List<String> reportMemories;
 	
@@ -35,13 +34,13 @@ public class Memory {
 		this.type = type;
 	}
 
-	private void setInfo () throws FormatException {
+	private void setInfo () {
 			
 			List<Memorie> list = new ArrayList<>();
 			if(this.reportMemories.size() == 0) {
 				this.memories.add(new Memorie(1, "unknown"));
 				this.type = "unknown";
-				throw new FormatException("erro a setar a memória");
+				return;
 			}
 			for (String line : this.reportMemories) {
 				if(list.size() == 0) {
@@ -76,9 +75,9 @@ public class Memory {
 		for (int i = 0; i < this.memories.size(); i++) {
 			Memorie memorie = this.memories.get(i);
 			if(i + 1 == this.memories.size() ) {
-				sb.append(memorie.getHasTwin() + "x " + memorie.getMemory().replaceAll(" ", "") +" "+ this.type);
+				sb.append(memorie.getHasTwin() / 2 + "x " + memorie.getMemory().replaceAll(" ", "") +" "+ this.type);
 			}else {
-				sb.append(memorie.getHasTwin() + "x " + memorie.getMemory().replaceAll(" ", "") + " | ");
+				sb.append(memorie.getHasTwin() / 2 + "x " + memorie.getMemory().replaceAll(" ", "") + " | ");
 			}
 			
 			
