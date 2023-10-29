@@ -20,14 +20,13 @@ public class Motherboard {
         int lastIndex = resultDOS.size() - 1;
         mb = resultDOS.get(lastIndex);
       }else{
-        System.out.println(bb);
         mb = bb.getModel();
       }
     }catch(myException e){
-      throw new myException("Error ao pegar o nome da placa mãe - " + e.getMessage());
+      throw new myException("Error ao pegar o nome da placa mãe - " + e.getMessage(), e.getCause());
     }
     catch(IOException e){
-      throw new IOException("Error ao pegar o nome da placa mãe - " + e.getMessage());
+      throw new IOException("Error ao pegar o nome da placa mãe - " + e.getMessage(), e.getCause());
     }
     
     return mb;

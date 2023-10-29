@@ -27,7 +27,7 @@ public class DOS{
         }
       }
     } catch (Exception e) {
-      throw new IOException("Error ao executar o DOS - " + e.getMessage());
+      throw new IOException("Error ao executar o DOS - " + e.getMessage(), e.getCause());
     }
     return list;
   } 

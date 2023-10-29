@@ -21,9 +21,9 @@ public class Cpu {
        cpu = pi.getName();
       }
     }catch (myException e) {
-      throw new myException("error ao pegar nome da CPU - " + e.getMessage());
+      throw new myException("error ao pegar nome da CPU - " + e.getMessage(), e.getCause());
     }catch(IOException e){
-      throw new IOException("error ao pegar nome da CPU - " + e.getMessage());
+      throw new IOException("error ao pegar nome da CPU - " + e.getMessage(), e.getCause());
     }
     return cpu.replaceAll("(?i)\\d-core[\\w ]*", "").trim();
   }
