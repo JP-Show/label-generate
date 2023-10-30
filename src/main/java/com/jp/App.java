@@ -11,7 +11,7 @@ import com.exceptions.myException;
 public final class App {
     public static void main(String[] args) {
         try {
-            Memory.buildRam();
+            System.out.println(Memory.getName());
             System.out.println(Os.getName());
             System.out.println(Cpu.getName());
             System.out.println(Motherboard.getName());

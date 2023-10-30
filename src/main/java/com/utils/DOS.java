@@ -7,22 +7,21 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class DOS{
-  public static List<String> exec (String [] command) throws IOException{
+public class DOS {
+  public static List<String> exec(String[] command) throws IOException {
     List<String> list = new ArrayList<>();
     try {
       ProcessBuilder pb = new ProcessBuilder(command);
       Process process = pb.start();
-    
+
       InputStream is = process.getInputStream();
       InputStreamReader isr = new InputStreamReader(is);
       BufferedReader br = new BufferedReader(isr);
 
       Object[] listObjects = br.lines().toArray();
-      
-      for(Object item : listObjects){
-        if(!item.toString().equals("")){
+
+      for (Object item : listObjects) {
+        if (!item.toString().equals("")) {
           list.add((String) item);
         }
       }
@@ -30,5 +29,5 @@ public class DOS{
       throw new IOException("Error ao executar o DOS - " + e.getMessage(), e.getCause());
     }
     return list;
-  } 
+  }
 }

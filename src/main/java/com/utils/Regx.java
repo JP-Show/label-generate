@@ -6,21 +6,21 @@ import java.util.regex.Pattern;
 import com.exceptions.myException;
 
 public class Regx {
-  
-  public static String cutString (String regex, String text) throws Exception{
+
+  public static String cutString(String regex, String text) throws Exception {
     String result = "unknown";
-    try{
+    try {
       Pattern patt = Pattern.compile(regex);
 
       Matcher match = patt.matcher(text);
 
-      if(match.matches()){
+      if (match.matches()) {
         result = match.group(1);
       }
-    }catch (Exception e) {
+    } catch (Exception e) {
       throw new myException("Error ao tentar capturar um texto específico" + e.getMessage(), e.getCause());
     }
-  return result;
+    return result;
 
   }
 }

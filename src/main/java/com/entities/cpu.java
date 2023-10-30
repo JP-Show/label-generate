@@ -10,19 +10,19 @@ import com.utils.Sysinfo;
 import oshi.hardware.CentralProcessor.ProcessorIdentifier;
 
 public class Cpu {
-  public static String getName () throws myException, IOException {
+  public static String getName() throws myException, IOException {
     String cpu = "unknown";
     try {
       ProcessorIdentifier pi = Sysinfo.info().getHardware().getProcessor().getProcessorIdentifier();
-      if(pi.getModel() == "unknown"){
-         List<String> resultDOS = DOS.exec(new String[] {"wmic", "baseboard", "get", "product"});
+      if (pi.getModel() == "unknown") {
+        List<String> resultDOS = DOS.exec(new String[] { "wmic", "baseboard", "get", "product" });
         cpu = resultDOS.get(0);
-      }else{
-       cpu = pi.getName();
+      } else {
+        cpu = pi.getName();
       }
-    }catch (myException e) {
+    } catch (myException e) {
       throw new myException("error ao pegar nome da CPU - " + e.getMessage(), e.getCause());
-    }catch(IOException e){
+    } catch (IOException e) {
       throw new IOException("error ao pegar nome da CPU - " + e.getMessage(), e.getCause());
     }
     return cpu.replaceAll("(?i)\\d-core[\\w ]*", "").trim();
