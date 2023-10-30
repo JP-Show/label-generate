@@ -1,4 +1,4 @@
-package com.entities;
+package com.hardware;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,7 +27,6 @@ public class Motherboard {
     } catch (IOException e) {
       throw new IOException("Error ao pegar o nome da placa mãe - " + e.getMessage(), e.getCause());
     }
-
     return mb;
   }
 

@@ -1,4 +1,4 @@
-package com.entities;
+package com.hardware;
 
 import java.util.ArrayList;
 import java.util.List;

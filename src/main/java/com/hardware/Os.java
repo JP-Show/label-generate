@@ -1,4 +1,4 @@
-package com.entities;
+package com.hardware;
 
 import java.io.IOException;
 import java.util.List;
