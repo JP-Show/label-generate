@@ -9,13 +9,15 @@ public class MakeLabel {
   String mb;
   String ram;
   String disk;
+  String socket;
 
-  public MakeLabel(String os, String cpu, String mb, String ram, String disk) throws myException {
+  public MakeLabel(String os, String cpu, String mb, String ram, String disk, String socket) throws myException {
     this.os = formattOS(os);
     this.cpu = formattCPU(cpu);
     this.mb = formattMb(mb);
     this.ram = ram;
     this.disk = disk;
+    this.socket = socket;
   }
 
   private String formattCPU(String cpu) {
@@ -53,7 +55,7 @@ public class MakeLabel {
     StringBuilder sb = new StringBuilder();
 
     sb.append("SISTEMA: " + this.os.toUpperCase());
-    sb.append("\nPLACA MÃE: " + this.mb.toUpperCase());
+    sb.append("\nPLACA MÃE: " + this.mb.toUpperCase() + ", SOCKET = " + this.socket.toUpperCase());
     sb.append("\nPROCESSADOR: " + this.cpu.toUpperCase());
     sb.append("\nMEMÓRIA: " + this.ram.toUpperCase());
     sb.append("\nDISCO: " + this.disk.toUpperCase());
