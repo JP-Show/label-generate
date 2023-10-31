@@ -11,11 +11,10 @@ public class Regx {
     String result = "unknown";
     try {
       Pattern patt = Pattern.compile(regex);
-
       Matcher match = patt.matcher(text);
 
-      if (match.matches()) {
-        result = match.group(1);
+      if (match.find()) {
+        result = match.group();
       }
     } catch (Exception e) {
       throw new myException("Error ao tentar capturar um texto específico" + e.getMessage(), e.getCause());
