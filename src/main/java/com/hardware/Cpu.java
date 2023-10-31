@@ -25,6 +25,6 @@ public class Cpu {
     } catch (IOException e) {
       throw new IOException("error ao pegar nome da CPU - " + e.getMessage(), e.getCause());
     }
-    return cpu.replaceAll("(?i)\\d-core[\\w ]*", "").trim();
+    return cpu;
   }
 }

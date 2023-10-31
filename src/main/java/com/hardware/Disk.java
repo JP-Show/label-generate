@@ -33,7 +33,7 @@ public class Disk {
     List<String> listDisk = buildListDisk();
     StringBuilder sb = new StringBuilder("");
     for (String disk : listDisk) {
-      if (listDisk.equals(listDisk.get(listDisk.size() - 1))) {
+      if (disk.equals(listDisk.get(listDisk.size() - 1))) {
         sb.append(disk);
         break;
       }

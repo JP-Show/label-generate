@@ -6,7 +6,6 @@ import java.util.List;
 import com.exceptions.myException;
 import com.utils.DOS;
 import com.utils.Sysinfo;
-import com.utils.Regx;
 
 public class Os {
 
@@ -18,10 +17,11 @@ public class Os {
       version = Sysinfo.info().getOperatingSystem().getBitness();
 
       List<String> list = DOS
-          .exec(new String[] { "cmd.exe", "/c", "systeminfo | findstr /C:\"Nome do sistema operacional\"" });
-      String nameOS = list.get(0);
-
-      name = Regx.cutString(".*(Windows \\d+\\s?\\w*)", nameOS);
+          .exec(new String[] { "cmd.exe", "/c", "systeminfo" });
+      String nameOS = list.get(1);
+      if (nameOS != null) {
+        name = nameOS;
+      }
     } catch (myException e) {
       throw new myException("Error ao pegar o nome do sistema operacional - " + e.getMessage(), e.getCause());
     } catch (Exception e) {
