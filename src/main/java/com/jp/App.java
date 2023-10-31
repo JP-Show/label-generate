@@ -8,17 +8,23 @@ import com.hardware.Disk;
 import com.hardware.Memory;
 import com.hardware.Motherboard;
 import com.hardware.Os;
+import com.label.MakeLabel;
 
 public final class App {
     public static void main(String[] args) {
         try {
-            System.out.println(Disk.getName());
-            System.out.println(Memory.getName());
-            System.out.println(Os.getName());
-            System.out.println(Cpu.getName());
-            System.out.println(Motherboard.getName());
+            String cpu = Cpu.getName();
+            String disk = Disk.getName();
+            String ram = Memory.getName();
+            String mb = Motherboard.getName();
+            String os = Os.getName();
+
+            MakeLabel ml = new MakeLabel(os, cpu, mb, ram, disk);
+            System.out.println(ml.getLabel());
+
+            Runtime.getRuntime().exec("cmd /c start cmd.exe /K echo " + ml.getLabel());
         } catch (myException | IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage() + " " + e.getCause());
         }
     }
 }
