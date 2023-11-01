@@ -12,19 +12,22 @@ public class MakeLabel {
   String socket;
 
   public MakeLabel(String os, String cpu, String mb, String ram, String disk, String socket) throws myException {
-    this.os = formattOS(os);
-    this.cpu = formattCPU(cpu);
-    this.mb = formattMb(mb);
-    this.ram = ram;
-    this.disk = disk;
-    this.socket = socket;
+    this.os = formattOS(os).toUpperCase();
+    this.cpu = formattCPU(cpu).toUpperCase();
+    this.mb = formattMb(mb).toUpperCase();
+    this.ram = ram.toUpperCase();
+    this.disk = disk.toUpperCase();
+    this.socket = socket.toUpperCase();
   }
 
   private String formattCPU(String cpu) {
     String oldCPU = cpu;
     try {
       cpu = oldCPU.replaceAll("(?i)\\d-core[\\w ]*", "").trim();
-
+      cpu = cpu.replaceAll("[\\(R\\)]?", "");
+      cpu = cpu.replaceAll("CPU", "");
+      cpu = cpu.replaceAll("@", "");
+      cpu = cpu.trim();
     } catch (Exception e) {
     }
     return cpu;
@@ -33,7 +36,7 @@ public class MakeLabel {
   private String formattMb(String mb) throws myException {
     String oldMb = mb;
     try {
-      mb = Regx.cutString("([\\-\\w\\s]*)", oldMb);
+      mb = Regx.cutString("([\\-\\w\\s]*)", oldMb).trim();
 
     } catch (Exception e) {
       throw new myException("Error ao formatar a Placa mãe - " + e.getMessage(), e.getCause());
@@ -45,6 +48,7 @@ public class MakeLabel {
     String oldOs = os;
     try {
       os = Regx.cutString("(Windows [\\d\\s\\w]*)", oldOs);
+
     } catch (Exception e) {
       throw new myException("Error ao formatar o Sistema Operacional - " + e.getMessage(), e.getCause());
     }
@@ -54,11 +58,11 @@ public class MakeLabel {
   public String getLabel() {
     StringBuilder sb = new StringBuilder();
 
-    sb.append("SISTEMA: " + this.os.toUpperCase());
-    sb.append("\nPLACA MÃE: " + this.mb.toUpperCase() + ", SOCKET = " + this.socket.toUpperCase());
-    sb.append("\nPROCESSADOR: " + this.cpu.toUpperCase());
-    sb.append("\nMEMÓRIA: " + this.ram.toUpperCase());
-    sb.append("\nDISCO: " + this.disk.toUpperCase());
+    sb.append("SISTEMA: " + this.os);
+    sb.append("\nPLACA MÃE: " + this.mb + " SOCKET = " + this.socket);
+    sb.append("\nPROCESSADOR: " + this.cpu);
+    sb.append("\nMEMÓRIA: " + this.ram);
+    sb.append("\nDISCO: " + this.disk);
 
     return sb.toString();
   }

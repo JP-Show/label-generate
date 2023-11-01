@@ -10,7 +10,7 @@ public class Regx {
   public static String cutString(String regex, String text) throws Exception {
     String result = "unknown";
     try {
-      Pattern patt = Pattern.compile(regex);
+      Pattern patt = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
       Matcher match = patt.matcher(text);
 
       if (match.find()) {

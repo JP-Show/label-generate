@@ -3,6 +3,8 @@ package com.jp;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
 import org.odftoolkit.odfdom.doc.OdfDocument;
@@ -21,6 +23,9 @@ public final class App {
     public static void main(String[] args) throws Exception {
 
         try (InputStream input = new FileInputStream("config.properties")) {
+            DateTimeFormatter ftd = DateTimeFormatter.ofPattern("dd-MM-yyyy-HH-mm");
+            LocalDateTime date = LocalDateTime.now();
+
             Properties prop = new Properties();
             prop.load(input);
 
@@ -38,7 +43,9 @@ public final class App {
             OdfTextDocument otd = (OdfTextDocument) OdfDocument.loadDocument(path + "\\Model.odt");
             otd.getTableList().get(0).getCellByPosition(0, 0).setDisplayText(ml.getLabel());
 
-            otd.save(path + "\\test2.odt");
+            otd.save(path + "\\Relatorio" + date.format(ftd) + ".odt");
+
+            System.out.println("Relatório feito com sucesso :3");
 
         } catch (myException | IOException e) {
             System.out.println(e.getMessage() + " " + e.getCause());

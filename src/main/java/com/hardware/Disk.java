@@ -18,7 +18,8 @@ public class Disk {
         double sizeDouble = Math.floor(disk.getSize() * 0.000000001);
         Integer sizeInt = (int) sizeDouble;
 
-        String type = disk.getWrites() > 72000 ? "SSD" : "HDD";
+        System.out.println(disk);
+        String type = disk.getTransferTime() > 100000000l ? "SSD" : "HDD";
         String cap = sizeInt >= 1000 ? sizeInt / 1000 + " TB" : sizeInt + " GB";
 
         listDisk.add(type + " " + cap);
