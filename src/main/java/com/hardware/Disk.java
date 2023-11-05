@@ -9,6 +9,10 @@ import com.utils.Sysinfo;
 import oshi.hardware.HWDiskStore;
 
 public class Disk {
+
+  private static String type = "";
+  private static String[] modelNameSsd = new String[] { "SSD", "NVME", "M.2", "M2", "ADATA", "KINGSTON" };
+
   public static List<String> buildListDisk() throws myException {
     List<HWDiskStore> listHWD = new ArrayList<>();
     List<String> listDisk = new ArrayList<>();
@@ -18,8 +22,7 @@ public class Disk {
         double sizeDouble = Math.floor(disk.getSize() * 0.000000001);
         Integer sizeInt = (int) sizeDouble;
 
-        System.out.println(disk);
-        String type = disk.getTransferTime() > 100000000l ? "SSD" : "HDD";
+        type = isSolidState(disk.getModel());
         String cap = sizeInt >= 1000 ? sizeInt / 1000 + " TB" : sizeInt + " GB";
 
         listDisk.add(type + " " + cap);
@@ -41,5 +44,12 @@ public class Disk {
       sb.append(disk + " | ");
     }
     return sb.toString();
+  }
+
+  private static String isSolidState(String modelName) {
+    for (String names : modelNameSsd)
+      if (modelName.contains(names))
+        return "SSD";
+    return "HDD";
   }
 }
