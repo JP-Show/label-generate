@@ -4,12 +4,13 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import com.utils.Log;
 import com.utils.Regx;
 
 public class Report {
 
     public static String pickOne(FileReader fr, String start, String end, String item) throws Exception {
-        String socket = "unknown";
+        String roll = "unknown";
         try {
             BufferedReader br = new BufferedReader(fr);
 
@@ -19,21 +20,23 @@ public class Report {
                 if (line.contains(start)) {
                     while (!line.contains(end)) {
                         if (line.contains(item)) {
-                            socket = line;
-                            return format(socket);
+                            roll = line;
+                            return format(roll);
                         }
                         line = br.readLine();
                     }
-                    return socket;
+                    return roll;
                 }
                 line = br.readLine();
             }
 
         } catch (IOException e) {
-
-            e.printStackTrace();
+            Log.createLogFile("Error pegar uma linha no relatorio - " + e.getMessage());
+            System.out.println("Error pegar uma linha no relatorio");
         }
-        return socket;
+        if (roll == "unknown")
+            Log.createLogFile("Error pegar uma linha no relatorio");
+        return roll;
     }
 
     private static String format(String string) throws Exception {

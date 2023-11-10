@@ -3,13 +3,13 @@ package com.hardware;
 import java.io.IOException;
 import java.util.List;
 
-import com.exceptions.myException;
 import com.utils.DOS;
+import com.utils.Log;
 import com.utils.Sysinfo;
 
 public class Os {
 
-  public static String getName() throws myException, IOException {
+  public static String getName() {
     String name = "unknown";
     int version = 00;
 
@@ -22,10 +22,9 @@ public class Os {
       if (nameOS != null) {
         name = nameOS;
       }
-    } catch (myException e) {
-      throw new myException("Error ao pegar o nome do sistema operacional - " + e.getMessage(), e.getCause());
-    } catch (Exception e) {
-      throw new myException("Error ao pegar o nome do sistema operacional - " + e.getMessage(), e.getCause());
+    } catch (IOException e) {
+      Log.createLogFile("Error pegar o socket - " + e.getMessage());
+      System.out.println("Error ao pegar o nome do sistema operacional - " + e.getMessage() + e.getCause());
     }
     String Os = name + " x" + version;
     return Os;

@@ -1,6 +1,6 @@
 package com.label;
 
-import com.exceptions.myException;
+import com.utils.Log;
 import com.utils.Regx;
 
 public class MakeLabel {
@@ -11,7 +11,7 @@ public class MakeLabel {
   String disk;
   String socket;
 
-  public MakeLabel(String os, String cpu, String mb, String ram, String disk, String socket) throws myException {
+  public MakeLabel(String os, String cpu, String mb, String ram, String disk, String socket) {
     this.os = formatOS(os).toUpperCase();
     this.cpu = formatCPU(cpu).toUpperCase();
     this.mb = formatMb(mb).toUpperCase();
@@ -33,7 +33,7 @@ public class MakeLabel {
     return cpu;
   }
 
-  private String formatSocket(String socket) throws myException {
+  private String formatSocket(String socket) {
     String oldSocket = socket;
     try {
       if (socket.length() > 10)
@@ -42,29 +42,33 @@ public class MakeLabel {
       socket = Regx.cutString("LGA\\d{3,4}|AM\\d|FM\\d ", oldSocket).trim();
 
     } catch (Exception e) {
-      throw new myException("Error ao formatar a Placa mãe - " + e.getMessage(), e.getCause());
+      Log.createLogFile("Error ao formatar o socket -  " + e.getMessage());
+      System.out.println("Error ao formatar o socket - ");
+
     }
     return socket;
   }
 
-  private String formatMb(String mb) throws myException {
+  private String formatMb(String mb) {
     String oldMb = mb;
     try {
       mb = Regx.cutString("([\\-\\w\\s]*)", oldMb).trim();
 
     } catch (Exception e) {
-      throw new myException("Error ao formatar a Placa mãe - " + e.getMessage(), e.getCause());
+      Log.createLogFile("Error ao formatar a Placa mãe -  " + e.getMessage());
+      System.out.println("Error ao formatar a Placa mãe - ");
     }
     return mb;
   }
 
-  private String formatOS(String os) throws myException {
+  private String formatOS(String os) {
     String oldOs = os;
     try {
       os = Regx.cutString("(Windows [\\d\\s\\w]*)", oldOs);
 
     } catch (Exception e) {
-      throw new myException("Error ao formatar o Sistema Operacional - " + e.getMessage(), e.getCause());
+      Log.createLogFile("Error ao formatar o Sistema Operacional - " + e.getMessage());
+      System.out.println("Error ao formatar o Sistema Operacional - ");
     }
     return os;
   }

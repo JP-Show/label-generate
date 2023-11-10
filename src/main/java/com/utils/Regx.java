@@ -3,11 +3,9 @@ package com.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.exceptions.myException;
-
 public class Regx {
 
-  public static String cutString(String regex, String text) throws Exception {
+  public static String cutString(String regex, String text) {
     String result = "unknown";
     try {
       Pattern patt = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
@@ -17,7 +15,8 @@ public class Regx {
         result = match.group();
       }
     } catch (Exception e) {
-      throw new myException("Error ao tentar capturar um texto específico" + e.getMessage(), e.getCause());
+      Log.createLogFile("\"Error ao tentar capturar um texto específico - " + e.getMessage());
+      System.out.println("\"Error ao tentar capturar um texto específico - ");
     }
     return result;
 

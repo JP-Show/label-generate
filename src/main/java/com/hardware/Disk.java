@@ -3,7 +3,7 @@ package com.hardware;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.exceptions.myException;
+import com.utils.Log;
 import com.utils.Sysinfo;
 
 import oshi.hardware.HWDiskStore;
@@ -13,7 +13,7 @@ public class Disk {
   private static String type = "";
   private static String[] modelNameSsd = new String[] { "SSD", "NVME", "M.2", "M2", "ADATA", "KINGSTON" };
 
-  public static List<String> buildListDisk() throws myException {
+  public static List<String> buildListDisk() {
     List<HWDiskStore> listHWD = new ArrayList<>();
     List<String> listDisk = new ArrayList<>();
     try {
@@ -27,13 +27,14 @@ public class Disk {
 
         listDisk.add(type + " " + cap);
       }
-    } catch (myException e) {
-      throw new myException("Error ao criar lista de discos - " + e.getMessage(), e.getCause());
+    } catch (Exception e) {
+      Log.createLogFile("Error ao buildar o hdd ou ssd - " + e.getMessage());
+      System.out.println("Error ao buildar o hdd ou ssd - " + e.getMessage() + e.getCause());
     }
     return listDisk;
   }
 
-  public static String getName() throws myException {
+  public static String getName() {
     List<String> listDisk = buildListDisk();
     StringBuilder sb = new StringBuilder("");
     for (String disk : listDisk) {

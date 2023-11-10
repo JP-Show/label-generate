@@ -3,13 +3,13 @@ package com.hardware;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.exceptions.myException;
+import com.utils.Log;
 import com.utils.Sysinfo;
 
 import oshi.hardware.PhysicalMemory;
 
 public class Memory {
-  private static List<Integer> getMemoryList() throws myException {
+  private static List<Integer> getMemoryList() {
     List<Integer> listMemory = new ArrayList<>();
     try {
       List<PhysicalMemory> listPH = Sysinfo.info().getHardware().getMemory().getPhysicalMemory();
@@ -18,14 +18,15 @@ public class Memory {
         int mem = (int) Math.floor(cap);
         listMemory.add(mem);
       }
-    } catch (myException e) {
+    } catch (Exception e) {
       listMemory.add(0);
-      throw new myException("Error ao capturar a lista de Memórias - " + e.getMessage(), e.getCause());
+      Log.createLogFile("Error ao capturar a lista de Memórias - " + e.getMessage());
+      System.out.println("Error ao capturar a lista de Memórias - " + e.getMessage() + e.getCause());
     }
     return listMemory;
   }
 
-  private static List<Ram> addRamToList(List<Integer> listMemory) throws myException {
+  private static List<Ram> addRamToList(List<Integer> listMemory) {
     List<Ram> listRam = new ArrayList<>();
     try {
       for (int mem : listMemory) {
@@ -48,23 +49,23 @@ public class Memory {
         }
       }
     } catch (Exception e) {
-      throw new myException("Erro ao adicionar a memória na lista - " + e.getMessage(), e.getCause());
+      Log.createLogFile("Error ao add a ram para lista - " + e.getMessage());
+      System.out.println("Error ao add a ram para lista - " + e.getMessage() + e.getCause());
 
     }
 
     return listRam;
   }
 
-  private static List<Ram> buildRam() throws myException {
-
+  private static List<Ram> buildRam() {
     List<Integer> listMemory = getMemoryList();
     List<Ram> listRam = addRamToList(listMemory);
     return listRam;
   }
 
-  public static String getName() throws myException {
+  public static String getName() {
     List<Ram> listRam = buildRam();
-    StringBuilder sb = new StringBuilder();
+    StringBuilder sb = new StringBuilder("");
 
     for (Ram ram : listRam) {
       if (ram.equals(listRam.get(listRam.size() - 1))) {

@@ -1,9 +1,6 @@
 package com.jp;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,7 +9,6 @@ import java.util.Properties;
 import org.odftoolkit.odfdom.doc.OdfDocument;
 import org.odftoolkit.odfdom.doc.OdfTextDocument;
 
-import com.exceptions.myException;
 import com.hardware.Cpu;
 import com.hardware.Disk;
 import com.hardware.Memory;
@@ -20,7 +16,7 @@ import com.hardware.Motherboard;
 import com.hardware.Os;
 import com.hardware.Socket;
 import com.label.MakeLabel;
-import com.odf.Report;
+import com.utils.Log;
 
 public final class App {
     public static void main(String[] args) throws Exception {
@@ -32,37 +28,19 @@ public final class App {
             Properties prop = new Properties();
             prop.load(input);
 
-            String path = prop.getProperty("fileSaveLabel");
-
+            String dirFile = prop.getProperty("dirFile");
+            String pathSK = "";
             String currentDir = System.getProperty("user.dir");
-            System.out.println(currentDir);
+            pathSK = currentDir.replace(dirFile, "");
+
+            String path = prop.getProperty("fileSaveLabel");
 
             String cpu = Cpu.getName();
             String disk = Disk.getName();
             String ram = Memory.getName();
             String mb = Motherboard.getName();
             String os = Os.getName();
-            String socket = Socket.getName();
-
-            if (socket.contains("SOCKET")) {
-                String dirFile = prop.getProperty("dirFile");
-                String pathSK = "";
-                pathSK = currentDir.replace(dirFile, "");
-
-                File file = new File(pathSK);
-                File[] files = file.listFiles();
-
-                for (File line : files) {
-                    if (line.toString().contains("txt")) {
-                        FileReader fr = new FileReader(line);
-
-                        String socket2 = Report.pickOne(fr, "-[ CPUID ]-", "-[ Placa mãe ]-",
-                                "Identificador da plataforma");
-                        socket = socket2;
-                    }
-                }
-
-            }
+            String socket = Socket.getName(pathSK);
 
             MakeLabel ml = new MakeLabel(os, cpu, mb, ram, disk, socket);
 
@@ -73,8 +51,9 @@ public final class App {
 
             System.out.println("Relatório feito com sucesso :3");
 
-        } catch (myException | IOException e) {
-            System.out.println(e.getMessage() + " " + e.getCause());
+        } catch (Exception e) {
+            Log.createLogFile("Error no programa principal  " + e.getMessage());
+            System.out.println("Error no programa principal  ");
         }
     }
 }
