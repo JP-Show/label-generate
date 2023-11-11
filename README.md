@@ -26,6 +26,7 @@ para usar esse programa você vai precisar do AIDA64 em conjunto (claro que ele 
 
 EM CASO DE ERROR
 
-vai ser gerador um log dentro da pasta onde está o generate-label.jar, vai ser um log, pode tentar corrigir apartir desse error ou mandar constatar o error no repositório do programa
+vai ser gerador um log dentro da pasta onde está o generate-label.jar, vai ser um log, pode tentar corrigir apartir desse error ou mandar constatar o error [aqui](https://github.com/Ponto-a-Ponto-LTDA/label-generate/issues) :)
 
-https://github.com/Ponto-a-Ponto-LTDA/label-generate/issues   :)
+## Download
+Você pode baixar [aqui](https://github.com/Ponto-a-Ponto-LTDA/label-generate/releases/tag/v1.0-rc)
