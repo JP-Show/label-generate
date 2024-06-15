@@ -9,9 +9,16 @@ import com.utils.Sysinfo;
 
 import oshi.hardware.Baseboard;
 
-public class Motherboard {
+public class Motherboard extends Thread {
 
-  public static String getName() {
+  public String name = "";
+
+  @Override
+  public void run() {
+    name = name();
+  }
+
+  public String name() {
     String mb = "unknown";
     try {
       Baseboard bb = Sysinfo.info().getHardware().getComputerSystem().getBaseboard();

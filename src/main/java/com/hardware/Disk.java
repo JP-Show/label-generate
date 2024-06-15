@@ -8,10 +8,16 @@ import com.utils.Sysinfo;
 
 import oshi.hardware.HWDiskStore;
 
-public class Disk {
+public class Disk extends Thread {
 
   private static String type = "";
   private static String[] modelNameSsd = new String[] { "SSD", "NVME", "M.2", "M2", "ADATA", "KINGSTON" };
+  public String name = "";
+
+  @Override
+  public void run() {
+    name = name();
+  }
 
   public static List<String> buildListDisk() {
     List<HWDiskStore> listHWD = new ArrayList<>();
@@ -34,7 +40,7 @@ public class Disk {
     return listDisk;
   }
 
-  public static String getName() {
+  public static String name() {
     List<String> listDisk = buildListDisk();
     StringBuilder sb = new StringBuilder("");
     for (String disk : listDisk) {

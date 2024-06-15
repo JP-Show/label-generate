@@ -7,9 +7,15 @@ import com.utils.DOS;
 import com.utils.Log;
 import com.utils.Sysinfo;
 
-public class Os {
+public class Os extends Thread {
+  public String name = "";
 
-  public static String getName() {
+  @Override
+  public void run() {
+    name = name();
+  }
+
+  public String name() {
     String name = "unknown";
     int version = 00;
 

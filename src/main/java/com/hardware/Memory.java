@@ -8,7 +8,15 @@ import com.utils.Sysinfo;
 
 import oshi.hardware.PhysicalMemory;
 
-public class Memory {
+public class Memory extends Thread {
+
+  public String name = "";
+
+  @Override
+  public void run() {
+    name = name();
+  }
+
   private static List<Integer> getMemoryList() {
     List<Integer> listMemory = new ArrayList<>();
     try {
@@ -63,7 +71,7 @@ public class Memory {
     return listRam;
   }
 
-  public static String getName() {
+  public static String name() {
     List<Ram> listRam = buildRam();
     StringBuilder sb = new StringBuilder("");
 

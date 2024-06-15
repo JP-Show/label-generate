@@ -8,8 +8,16 @@ import com.odf.Report;
 import com.utils.DOS;
 import com.utils.Log;
 
-public class Socket {
-  public static String getName(String pathSK) {
+public class Socket extends Thread {
+  public String pathSK;
+  public String name = "";
+
+  @Override
+  public void run() {
+    name = name();
+  }
+
+  public String name() {
     String socket = "unknown";
     try {
       socket = getSocketBySocketInfo();

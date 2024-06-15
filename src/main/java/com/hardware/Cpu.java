@@ -9,8 +9,15 @@ import com.utils.Sysinfo;
 
 import oshi.hardware.CentralProcessor.ProcessorIdentifier;
 
-public class Cpu {
-  public static String getName() {
+public class Cpu extends Thread {
+  public String name = "";
+
+  @Override
+  public void run() {
+    name = name();
+  }
+
+  public String name() {
     String cpu = "unknown";
     try {
       ProcessorIdentifier pi = Sysinfo.info().getHardware().getProcessor().getProcessorIdentifier();
